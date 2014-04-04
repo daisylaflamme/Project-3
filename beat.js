@@ -81,11 +81,13 @@ function rowAttrsFromTrack(track) {
         'data-album': track.album.name,
         'data-artist': artists(track),
         'data-title': track.name,
+        'data-length': track.popularity,
         // (3) This is the conditional operator, which can be used as a 
         // shortcut for writing out a full if/else statement.  You can read
         // more about it at:
         // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator
         'data-tempo': track.echo ? track.echo.audio_summary.tempo : -1
+        //'data-length': track.echo ? track.echo.audio_summary.length : -1
     };
 
     return attrs;
