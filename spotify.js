@@ -187,5 +187,5 @@ function coverURL(track) {
     // (1) This function grabs the cover thumbnail URL that the Spotify API 
     // provides us with and modifies it to grab the hi-res, unbranded version
 
-    return track.spotify.thumbnail_url.replace('/cover/', '/640/');
+    return track.spotify.thumbnail_url.replace('/cover/', '/850/');
 }
