@@ -87,7 +87,7 @@ function rowAttrsFromTrack(track) {
         // more about it at:
         // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator
         'data-tempo': track.echo ? track.echo.audio_summary.tempo : -1,
-        'data-popularity': track.echo ? track.echo.audio_summary.popularity : -1
+        'data-popularity': track.popularity*100 + "%"
     };
 
     return attrs;
