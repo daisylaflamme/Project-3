@@ -130,7 +130,7 @@ function loudnessAt(track, time) {
 }
 
 
-function loudnessSketch(track) {
+function loudnessSketch(track) {//note for Daisy: create similar function for the cess popularity processing sketch called popularitySketch
     // (2) This function _returns a function_ which Processing runs to make 
     // our sketch.
 
@@ -187,6 +187,13 @@ function plotLoudness(track) {
 
     return P;
 }
+function plotPopularity(track) {
+    // (1) In this function we actually attach the Processing sketch to our canvas
+
+    var P = new Processing(track.canvas, popularitySketch(track));
+
+    return P;
+}
 
 
 function rowBackground(row) {
@@ -208,3 +215,24 @@ function rowBackground(row) {
 
     return binaryImageData;
 }
+
+function cellBackground(cell) {
+    // (1) This function actually plots the loudness in an orphaned canvas
+    // element--_i.e._ a canvas element not in the DOM--and then converts it
+    // to https://en.wikipedia.org/wiki/Base64 to construct an image we use
+    // as the background of a row, on the fly
+
+    var trackCanvas = document.createElement('canvas');
+    var track = trackByHref(row.id);//it maight be cell.id, or cell.class - not sure
+    track.canvas = trackCanvas;
+
+    plotPopularity(track);
+
+    // You can read more about this technique at:
+    // http://www.html5canvastutorials.com/advanced/html5-canvas-get-image-data-url/
+    var binaryImageData = trackCanvas.toDataURL("image/png");
+    cell.style.backgroundImage = "url(" + binaryImageData + ")";
+
+    return binaryImageData;
+}
+
