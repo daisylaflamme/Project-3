@@ -65,6 +65,7 @@ function trackDiv(track) {
         cellsFromTrackAndAttrs(track, attrs)); // which contains these cells
 
     rowBackground(row); // (1) and add a background to the row
+    //cellBackground(cell);
 
     return row;
 }

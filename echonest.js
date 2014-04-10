@@ -145,7 +145,7 @@ function loudnessSketch(track) {//note for Daisy: create similar function for th
         var points = []; // (2) an array to hold the points we'll plot
 
         P.setup = function() {
-            P.size(850, 80);
+            P.size(850, 100);
             if (track.echo) {
                 for (var i = 0; i < numPoints; i++) {
                     loud[i] = loudnessAt(track, dt * i);
@@ -169,6 +169,10 @@ function loudnessSketch(track) {//note for Daisy: create similar function for th
             } else {
                 console.log(track.name, "has no EchoNest data.");
             }
+            console.log(track.popularity*100)
+            P.fill(0, 255, 0, 100);
+            P.stroke(0, 255, 0);
+            P.rect(720, 0, 100, track.popularity*100);
         };
 
         P.draw = function() {
@@ -212,26 +216,6 @@ function rowBackground(row) {
     // http://www.html5canvastutorials.com/advanced/html5-canvas-get-image-data-url/
     var binaryImageData = trackCanvas.toDataURL("image/png");
     row.style.backgroundImage = "url(" + binaryImageData + ")";
-
-    return binaryImageData;
-}
-
-function cellBackground(cell) {
-    // (1) This function actually plots the loudness in an orphaned canvas
-    // element--_i.e._ a canvas element not in the DOM--and then converts it
-    // to https://en.wikipedia.org/wiki/Base64 to construct an image we use
-    // as the background of a row, on the fly
-
-    var trackCanvas = document.createElement('canvas');
-    var track = trackByHref(row.id);//it maight be cell.id, or cell.class - not sure
-    track.canvas = trackCanvas;
-
-    plotPopularity(track);
-
-    // You can read more about this technique at:
-    // http://www.html5canvastutorials.com/advanced/html5-canvas-get-image-data-url/
-    var binaryImageData = trackCanvas.toDataURL("image/png");
-    cell.style.backgroundImage = "url(" + binaryImageData + ")";
 
     return binaryImageData;
 }
